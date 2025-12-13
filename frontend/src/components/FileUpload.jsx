@@ -9,7 +9,16 @@ const FileUpload = ({ onAnalysisComplete }) => {
   const fileInputRef = useRef(null);
 
   const handleFileChange = (e) => {
-    setFiles(Array.from(e.target.files));
+    const selectedFiles = Array.from(e.target.files);
+
+    if (selectedFiles.length > 3) {
+      setError("You can upload a maximum of 3  PDF files only.");
+      setFiles([]);
+      fileInputRef.current.value = "";
+      return;
+    }
+
+    setFiles(selectedFiles);
     setError(null);
   };
 
@@ -17,7 +26,7 @@ const FileUpload = ({ onAnalysisComplete }) => {
     e.preventDefault();
 
     if (files.length === 0) {
-      setError("Please select at least one pdf file.");
+      setError("Please select at least one PDF file.");
       return;
     }
     const formData = new FormData();
@@ -38,6 +47,7 @@ const FileUpload = ({ onAnalysisComplete }) => {
       onAnalysisComplete(res.data.results);
       setUploading(false);
       fileInputRef.current.value = "";
+      setFiles([]);
     } catch (error) {
       setUploading(false);
       setError("Failed to analyze pdf. Please try again.");
@@ -63,14 +73,14 @@ const FileUpload = ({ onAnalysisComplete }) => {
             />
             <div className="cursor-pointer border-2 border-dashed border-blue-300 rounded-lg py-6 px-4 text-gray-500 hover:border-blue-500 hover:text-blue-600 transition">
               {files.length > 0
-                ? `${files.length} Pdf selected`
+                ? `${files.length} PDF${files.length > 1 ? "s" : ""} Selected`
                 : "Click to upload your PDF file"}
             </div>
           </label>
 
           {uploading && (
             <p className="text-blue-600 mb-4 font-medium">
-              Analyzing Pdf, please wait...
+              Analyzing PDF, please wait...
             </p>
           )}
           {error && <p className="text-red-700 mb-4">{error}</p>}
@@ -84,7 +94,7 @@ const FileUpload = ({ onAnalysisComplete }) => {
                 : "bg-blue-600 hover:bg-blue-700"
             }`}
           >
-            {uploading ? "Analyzing..." : "Analyze Pdf"}
+            {uploading ? "Analyzing..." : "Analyze PDF"}
           </button>
         </form>
       </div>

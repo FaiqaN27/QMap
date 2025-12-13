@@ -8,61 +8,67 @@ const SummaryDisplay = ({ results }) => {
   }
   return (
     <div className="max-w-4xl mx-auto mt-10 p-4 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">
+      <h2 className="text-center text-2xl font-bold mb-6 text-gray-800">
         Analysis Results
       </h2>
 
       {results.map((result, index) => {
         let lastMaxQ = null;
         return (
-          <div key={index} className="mb-10 border-b pb-6">
-            <h3 className="text-xl font-semibold text-blue-700 mb-2">
+          <div key={index} className="space-y-4 border rounded-lg p-5 pb-6">
+            <h3 className="text-2xl mb-4 font-semibold text-blue-700">
               {result.fileName}
             </h3>
+            <hr />
+
+            <h4 className="text-xl mb-4 font-bold text-blue-700">Summary</h4>
 
             <p className="text-gray-700">
-              <strong>Printed Page Numbers: </strong>
-              {result.printedPageSequence.join(", ")}
+              <strong>Total Pages: </strong>
+              {result.totalPages}
+            </p>
+
+            <p className="text-gray-700">
+              <strong>Printed Pages: </strong>
+              {result.printedPageSequence.length > 0
+                ? result.printedPageSequence.join(", ")
+                : "Not Detected"}
             </p>
 
             <div>
-              <h4 className="font-semibold text-gray-800 ">
-                Page-Wise Mapping
+              <h4 className="text-xl font-bold mb-4 text-blue-700">
+                Page Details
               </h4>
 
               <div className="space-y-3">
-                {result.pageSummary.map((page) => {
+                {result.pageSummary.map((page, i) => {
                   let label = "";
 
                   if (page.range) {
                     const [minQ, maxQ] = page.range.split("-").map(Number);
 
-                    lastMaxQ = maxQ;
-                    label = `Question ${page.range}`;
+                    // Detect reset (Q1 after higher question)
+                    if (lastMaxQ !== null && minQ <= lastMaxQ) {
+                      lastMaxQ = maxQ;
+                      label = `Question ${page.range}`;
+                    } else {
+                      lastMaxQ = maxQ;
+                      label = `Question ${page.range}`;
+                    }
                   } else {
                     if (lastMaxQ !== null) {
-                      label = `Question ${lastMaxQ} - continue`;
+                      label = `Question ${lastMaxQ} – continue`;
                     } else {
                       label = "No questions on this page";
                     }
                   }
 
                   return (
-                    <div
-                      className="border rounded-md p-3 bg-gray-50"
-                      key={page.printedPage}
-                    >
+                    <div key={page.printedPage}>
                       <p className="text-gray-800">
                         <strong>Page {page.printedPage}: </strong>
                         {label}
                       </p>
-
-                      {page.questionStarts?.length > 0 && (
-                        <p className="text-gray-600 text-sm">
-                          Started Question:
-                          {page.questionStarts.join(", ")}
-                        </p>
-                      )}
                     </div>
                   );
                 })}
