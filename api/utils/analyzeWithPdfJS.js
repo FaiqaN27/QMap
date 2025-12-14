@@ -6,6 +6,9 @@ global.ImageData = ImageData;
 global.DOMMatrix = global.DOMMatrix || class DOMMatrix {};
 global.Path2D = global.Path2D || class Path2D {};
 
+// disable worker for Node.js / serverless
+pdfjsLib.GlobalWorkerOptions.workerSrc = null;
+
 const questionRegex = /(?:Q|Question)\.?\s*\(?\s*(\d+)\s*\)?/gi;
 const printedPageRegex =
   /^(?:page|p\.?)?\s*[\(\[\-]?\s*(\d{1,4})\s*(?:of\s*\d{1,4})?[\)\]\-]?\s*$/i;
