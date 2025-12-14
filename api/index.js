@@ -24,10 +24,9 @@ app.use("/api", pdfRoute);
 
 const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
-  if (process.env.NODE_ENV !== "production") {
-    console.log(
-      `Server is running on PORT ${PORT} in ${process.env.NODE_ENV} mode`
-    );
-  }
-});
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT;
+  app.listen(PORT, () => {
+    console.log(`Server running on PORT ${PORT}`);
+  });
+}
