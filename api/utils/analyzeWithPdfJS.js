@@ -1,5 +1,6 @@
 import { Canvas, Image, ImageData } from "@napi-rs/canvas";
-import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
+// import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
+const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.js");
 import fs from "fs/promises";
 
 global.Image = Image;
