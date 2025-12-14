@@ -1,7 +1,3 @@
-import { GlobalWorkerOptions } from "pdfjs-dist/legacy/build/pdf.mjs";
-
-GlobalWorkerOptions.workerSrc = "";
-
 import { Canvas, Image, ImageData } from "@napi-rs/canvas";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import fs from "fs/promises";

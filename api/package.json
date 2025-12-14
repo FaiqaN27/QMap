@@ -6,12 +6,13 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "now-build": "node build.js"
   },
   "author": "",
   "license": "ISC",
   "engines": {
-      "node": ">=18.0.0" 
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@napi-rs/canvas": "^0.1.84",
