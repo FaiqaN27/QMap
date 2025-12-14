@@ -8,8 +8,7 @@ const app = express();
 
 const corsOption = {
   origin: process.env.FRONTEND_URL,
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
+  methods: ["GET", "POST"],
   allowedHeaders: ["Content-type", "Authorization"],
 };
 
