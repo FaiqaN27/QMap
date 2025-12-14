@@ -2,7 +2,7 @@ import { Canvas, Image, ImageData } from "@napi-rs/canvas";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import fs from "fs/promises";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = null;
+pdfjsLib.GlobalWorkerOptions.workerSrc = "";
 
 global.Image = Image;
 global.ImageData = ImageData;
