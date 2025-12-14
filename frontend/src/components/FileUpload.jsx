@@ -38,7 +38,7 @@ const FileUpload = ({ onAnalysisComplete }) => {
       setUploading(true);
       setError(null);
       const res = await axios.post(
-        `${BACKEND_BASE_URL}/analyze-pdf`,
+        `${BACKEND_BASE_URL}/api/analyze-pdf`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
