@@ -112,9 +112,8 @@ Frontend displays:
 
 ---
 
-## 🌍 Live Demo and Source Code
+## 🌍 Source Code
 
-🔗 **Live App:** []()  
 💻 **GitHub Repo:** [https://github.com/FaiqaN27/QMap](https://github.com/FaiqaN27/QMap)
 
 ---
