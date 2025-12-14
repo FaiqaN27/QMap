@@ -22,6 +22,12 @@ app.get("/", (req, res) => {
 
 app.use("/api", pdfRoute);
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on PORT ${process.env.PORT}`);
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  if (process.env.NODE_ENV !== "production") {
+    console.log(
+      `Server is running on PORT ${PORT} in ${process.env.NODE_ENV} mode`
+    );
+  }
 });
