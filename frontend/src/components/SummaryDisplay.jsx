@@ -13,9 +13,11 @@ const SummaryDisplay = ({ results }) => {
       </h2>
 
       {results.map((result, index) => {
-        let lastMaxQ = null;
         return (
-          <div key={index} className="space-y-4 border rounded-lg p-5 pb-6">
+          <div
+            key={index}
+            className="space-y-4 my-6 border rounded-lg p-5 pb-6"
+          >
             <h3 className="text-2xl mb-4 font-semibold text-blue-700">
               {result.fileName}
             </h3>
@@ -41,37 +43,14 @@ const SummaryDisplay = ({ results }) => {
               </h4>
 
               <div className="space-y-3">
-                {result.pageSummary.map((page, i) => {
-                  let label = "";
-
-                  if (page.range) {
-                    const [minQ, maxQ] = page.range.split("-").map(Number);
-
-                    // Detect reset (Q1 after higher question)
-                    if (lastMaxQ !== null && minQ <= lastMaxQ) {
-                      lastMaxQ = maxQ;
-                      label = `Question ${page.range}`;
-                    } else {
-                      lastMaxQ = maxQ;
-                      label = `Question ${page.range}`;
-                    }
-                  } else {
-                    if (lastMaxQ !== null) {
-                      label = `Question ${lastMaxQ} – continue`;
-                    } else {
-                      label = "No questions on this page";
-                    }
-                  }
-
-                  return (
-                    <div key={page.printedPage}>
-                      <p className="text-gray-800">
-                        <strong>Page {page.printedPage}: </strong>
-                        {label}
-                      </p>
-                    </div>
-                  );
-                })}
+                {result.pageSummary.map((page, i) => (
+                  <div key={i}>
+                    <p className="text-gray-800">
+                      <strong>Page {page.printedPage}: </strong>
+                      {page.summaryLabel}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
