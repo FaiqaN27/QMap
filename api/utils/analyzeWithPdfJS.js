@@ -6,7 +6,7 @@ global.DOMMatrix = global.DOMMatrix || class DOMMatrix {};
 global.Path2D = global.Path2D || class Path2D {};
 
 // import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
-const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 import fs from "fs/promises";
 
 const questionRegex = /(?:Q|Question)\.?\s*\(?\s*(\d+)\s*\)?/gi;
