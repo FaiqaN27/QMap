@@ -6,7 +6,7 @@ global.DOMMatrix = global.DOMMatrix || class DOMMatrix {};
 global.Path2D = global.Path2D || class Path2D {};
 
 // import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
-import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
+// import pdfjsLib from "pdfjs-dist/legacy/build/pdf.js";
 import fs from "fs/promises";
 
 const questionRegex = /(?:Q|Question)\.?\s*\(?\s*(\d+)\s*\)?/gi;
@@ -14,6 +14,7 @@ const printedPageRegex =
   /^(?:page|p\.?)?\s*[\(\[\-]?\s*(\d{1,4})\s*(?:of\s*\d{1,4})?[\)\]\-]?\s*$/i;
 
 export const analyzeWithPdfJS = async (filePath, fileName) => {
+  const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
   const fileBuffer = await fs.readFile(filePath);
 
   const doc = await pdfjsLib.getDocument({
