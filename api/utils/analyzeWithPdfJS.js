@@ -2,8 +2,14 @@ import { GlobalWorkerOptions } from "pdfjs-dist/legacy/build/pdf.mjs";
 
 GlobalWorkerOptions.workerSrc = "";
 
+import { Canvas, Image, ImageData } from "@napi-rs/canvas";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import fs from "fs/promises";
+
+global.Image = Image;
+global.ImageData = ImageData;
+global.DOMMatrix = global.DOMMatrix || class DOMMatrix {};
+global.Path2D = global.Path2D || class Path2D {};
 
 const questionRegex = /(?:Q|Question)\.?\s*\(?\s*(\d+)\s*\)?/gi;
 const printedPageRegex =
