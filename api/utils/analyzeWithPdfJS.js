@@ -2,6 +2,8 @@ import { Canvas, Image, ImageData } from "@napi-rs/canvas";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
 import fs from "fs/promises";
 
+pdfjsLib.GlobalWorkerOptions.workerSrc = null;
+
 global.Image = Image;
 global.ImageData = ImageData;
 global.DOMMatrix = global.DOMMatrix || class DOMMatrix {};
@@ -16,7 +18,6 @@ export const analyzeWithPdfJS = async (filePath, fileName) => {
 
   const doc = await pdfjsLib.getDocument({
     data: new Uint8Array(fileBuffer),
-    disableWorker: true,
   }).promise;
 
   const printedPageSequence = [];
