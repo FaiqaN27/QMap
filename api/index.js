@@ -6,9 +6,21 @@ import cors from "cors";
 dotenv.config();
 const app = express();
 
-app.use(cors());
+const corsOption = {
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+  allowedHeaders: ["Content-type", "Authorization"],
+};
+
+app.use(cors(corsOption));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
 app.use("/api", pdfRoute);
 
 app.listen(process.env.PORT, () => {
