@@ -10,7 +10,11 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+      "node": ">=18.0.0" 
+  },
   "dependencies": {
+    "@napi-rs/canvas": "^0.1.84",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
